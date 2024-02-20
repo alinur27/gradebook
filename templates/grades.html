@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Grades</title>
+{% endblock %}
+{% block body %}
+<h1>Grades</h1>
+<a href="{{ url_for('add_grade') }}"><button>Add Grade</button></a>
+<form method="GET" action="{{ url_for('grades') }}">
+    <label for="search">Search:</label>
+    <input type="text" name="search" id="search">
+    <label for="min_grade">Min Grade:</label>
+    <input type="number" name="min_grade" id="min_grade">
+    <label for="max_grade">Max Grade:</label>
+    <input type="number" name="max_grade" id="max_grade">
+    <button type="submit">Search</button>
+</form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Grade ID</th>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+            <tr>
+                <td>{{ grade.grade_id }}</td>
+                <td>{{ grade.student.student_name }}</td>
+                <td>{{ grade.subject.subject_name }}</td>
+                <td>{{ grade.teacher.teacher_name }}</td>
+                <td>{{ grade.grade }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

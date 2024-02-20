@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Edit Teacher</title>
+{% endblock %}
+{% block body %}
+<h1>Edit Teacher</h1>
+    <form action="{{ url_for('edit_teacher', teacher_id=teacher.teacher_id) }}" method="post">
+        <label for="teacher_name">Teacher Name:</label><br>
+        <input type="text" id="teacher_name" name="teacher_name" value="{{ teacher.teacher_name }}"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{ teacher.email }}"><br>
+        <label for="phone">Phone:</label><br>
+        <input type="text" id="phone" name="phone" value="{{ teacher.phone }}"><br>
+        <input type="submit" value="Save Changes">
+    </form>
+{% endblock %}

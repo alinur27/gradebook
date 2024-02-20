@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Teachers List</title>
+    <style>
+.add-teacher-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add-teacher-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-teacher-button:hover {
+    background-color: #218838;
+}
+.teacher-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.teacher-table th, .teacher-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.teacher-table th {
+    background-color: #f2f2f2;
+}
+
+.teacher-table tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Стили для кнопки Options и выпадающего меню */
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #2980B9;
+}
+
+    </style>
+{% endblock %}
+{% block body %}
+<h2>Teachers List</h2>
+<div class="add-teacher-container">
+    <a href="{{ url_for('add_teacher') }}" class="add-teacher-button">Add Teacher</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Teacher Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in teachers %}
+        <tr>
+            <td>{{ teacher.teacher_name }}</td>
+            <td>{{ teacher.email }}</td>
+            <td>{{ teacher.phone }}</td>
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">Options</button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('edit_teacher', teacher_id=teacher.teacher_id) }}">Edit</a>
+                        <a href="{{ url_for('delete_teacher', teacher_id=teacher.teacher_id) }}">Delete</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

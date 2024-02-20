@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Gradebook Analysis</title>
+{% endblock %}
+{% block body %}
+<h1>Gradebook Analysis</h1>
+
+<h2>Students with High Grades</h2>
+<ul>
+    {% for student in high_grades %}
+        <li>{{ student.student_name }} - {{ student.grade }} - {{ student.subject_name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Students with Low Grades</h2>
+<ul>
+    {% for student in low_grades %}
+        <li>{{ student.student_name }} - {{ student.grade }} - {{ student.subject_name }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Average Grade</h2>
+<p>{{ average_grade }}</p>
+
+<h2>Average Grade by Subject</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Subject Name</th>
+            <th>Average Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject in average_grade_by_subject %}
+            <tr>
+                <td>{{ subject.subject_name }}</td>
+                <td>{{ subject.grade }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Subjects with Max Average Grade</h2>
+    <p>{{ max_average_subject.subject_name }} - {{ max_average_subject.grade }}</p>
+
+<h2>Subjects with Min Average Grade</h2>
+    <p>{{ min_average_subject.subject_name }} - {{ min_average_subject.grade }}</p>
+
+    <h2>Students with Max Grade by Subject</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Student Name (Max Grade)</th>
+                <th>Max Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in max_grade_students %}
+                <tr>
+                    <td>{{ row.subject_name }}</td>
+                    <td>{{ row.student_name }}</td>
+                    <td>{{ row.grade }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Students with Min Grade by Subject</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Student Name (Min Grade)</th>
+                <th>Min Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in min_grade_students %}
+                <tr>
+                    <td>{{ row.subject_name }}</td>
+                    <td>{{ row.student_name }}</td>
+                    <td>{{ row.grade }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
